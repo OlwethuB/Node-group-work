@@ -1,0 +1,21 @@
+Rest Api 
+REST API in Node.js is a way to build and deploy a RESTful web service using the Node.js platform. Node.js is a JavaScript runtime that allows developers to run JavaScript code on the server-side, making it possible to build web services using the same language that is used for client-side web development.
+
+To build a REST API in Node.js, developers can use a framework such as Express.js, which is a popular and lightweight framework for building web applications and APIs. With Express.js, developers can define routes, handle requests and responses, and use middleware to perform common tasks such as validation, error handling, and caching.
+
+Example of a simple REST API built with Node.js and Express.js:
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
+This example defines a simple API that responds to GET requests to the root route ('/') by sending the message 'Hello World!'. The app is started on port 3000 and listens for incoming requests.
+
+In this example, we are using the express library to create an express app, which is the main building block for our API. We then use the app.get() method to define a route that responds to GET requests to the root route ('/'). Finally, we use the app.listen() method to start the server and listen for incoming requests on port 3000.

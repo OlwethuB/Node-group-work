@@ -1,0 +1,49 @@
+web server
+
+In Node.js, a web server is a software component that listens for incoming requests and returns responses to clients. The most commonly used web server for building web applications in Node.js is the built-in http module.
+
+To build a web server in Node.js using the http module, developers can use the `http.createServer()` function to create a new server instance. The server instance can then be used to define routes for handling incoming requests, and to serve responses to clients.
+
+Example of a simple web server built with Node.js and the http module:
+
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  switch (req.url) {
+    case '/':
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('Hello, World!');
+      break;
+    case '/users':
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(users));
+      break;
+    case '/users/:id':
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      const userId = parseInt(req.params.id, 10);
+      if (users.find(u => u.id === parseInt(userId, 10))) {
+        res.end(JSON.stringify(users.find(u => u.id === parseInt(userId, 10))));
+      } else {
+        res.statusCode = 404;
+        res.end('User not found');
+      }
+      break;
+    default:
+      res.statusCode = 404;
+      res.end('Not found');
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
+This example defines a simple web server that listens for incoming requests on port 3000. The server has three routes defined:
+
+/: returns the string "Hello, World!"
+/users: returns a JSON array containing the list of all users
+/users/:id: returns the user with the specified id from the JSON array of all users
+In this example, we are using the built-in http module to create a new server instance and define routes for handling incoming requests. We then start the server and listen for incoming requests on port 3000.

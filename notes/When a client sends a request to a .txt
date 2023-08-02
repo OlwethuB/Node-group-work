@@ -1,0 +1,42 @@
+When a client sends a request to a web server, the request is first sent to the server's IP address and port number specified in the server's configuration. The server then uses the http module to handle the request and respond to the client.
+
+Here is an example of how the server handles a request from the client in code:
+
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  switch (req.url) {
+    case '/':
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('Hello, World!');
+      break;
+    case '/users':
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(users));
+      break;
+    case '/users/:id':
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      const userId = parseInt(req.params.id, 10);
+      if (users.find(u => u.id === parseInt(userId, 10))) {
+        res.end(JSON.stringify(users.find(u => u.id === parseInt(userId, 10))));
+      } else {
+        res.statusCode = 404;
+        res.end('User not found');
+      }
+      break;
+    default:
+      res.statusCode = 404;
+      res.end('Not found');
+  }
+});
+
+server.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
+In this example, the server uses the `req.url` property to determine which route to handle the incoming request. The `req.url` property contains the full URL of the request, including the protocol, hostname, port number, and path.
+
+For example, if the client sends a request to `http://example.com:3000/users`, the server will use the `switch` statement to determine which route to handle the request. The server will then return a response to the client based on the route that was selected.

@@ -1,0 +1,51 @@
+Restful Api 
+
+A RESTful API in Node.js is a way to build and deploy a RESTful web service using the Node.js platform. RESTful APIs follow the REST architectural style, which is based on the principles of statelessness, caching, and resource-based routing.
+
+To build a RESTful API in Node.js, developers can use a framework such as Express.js, which is a popular and lightweight framework for building web applications and APIs. With Express.js, developers can define routes, handle requests and responses, and use middleware to perform common tasks such as validation, error handling, and caching.
+
+Example of a RESTful API built with Node.js and Express.js:
+
+const express = require('express');
+const app = express();
+
+app.get('/users', (req, res) => {
+  res.json([
+    { id: 1, name: 'John Doe' },
+    { id: 2, name: 'Jane Doe' },
+    { id: 3, name: 'Jim Smith' }
+  ]);
+});
+
+app.get('/users/:id', (req, res) => {
+  const id = req.params.id;
+  const user = users.find(u => u.id === id);
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+  res.json(user);
+});
+
+app.post('/users', (req, res) => {
+  const user = req.body;
+  users.push(user);
+  res.status(201).send('User created successfully');
+});
+
+app.delete('/users/:id', (req, res) => {
+  const id = req.params.id;
+  const user = users.find(u => u.id === id);
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+  users.splice(users.indexOf(user), 1);
+  res.send('User deleted successfully');
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
+This example defines a RESTful API that responds to GET requests to the /users route by returning a JSON array of user objects, where each object represents a user with an id and a name. The API also defines a /users/:id route that responds to GET requests to retrieve a specific user by id, POST requests to create a new user, and DELETE requests to delete a user by id.
+
+In this example, we are using the express library to create an express app, which is the main building block for our API. We then define routes for each of the endpoints using the app.get(), app.post(), and app.delete() methods. Finally, we start the server and listen for incoming requests on port 3000.
